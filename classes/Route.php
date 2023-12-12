@@ -19,9 +19,12 @@
 		public static function get($uri, $handler){
 			$path = explode("/", $_SERVER['REQUEST_URI']);
 
+			$param = null;
+
 			if(count($path) > 2){
 				$uri = explode("/", $uri)[1];
 				$uri = "/".$uri."/".$path[2];
+				$param = $path[2];
 			}
 
 			/*if($_SERVER["REQUEST_URI"] == $uri && $_SERVER["REQUEST_METHOD"] == "GET"){
@@ -30,7 +33,7 @@
 				exit();
 			}*/
 			if($_SERVER["REQUEST_URI"] == $uri && $_SERVER["REQUEST_METHOD"] == "GET"){
-				exit($handler());
+				exit($handler($param));
 			}
 		}
 

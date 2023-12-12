@@ -5,6 +5,7 @@
 	require_once("classes/User.php"); /*Берет инфу из файла User.php*/
 	require_once("classes/Blog.php");
 	require_once("classes/Route.php");
+	require_once("simple_html_dom.php");
 	
 	$dbhost = '127.0.0.1';
 	$dbuser = 'root';
@@ -22,7 +23,7 @@
 	Route::view("/article/{id}", "article.html");
 	
 
-	Route::get("/getArticle/{id}", function(){return Blog::getArticleById(1);});
+	Route::get("/getArticle/{id}", function($id){return Blog::getArticleById($id);});
 	Route::get("/getArticles", function(){return Blog::getArticles();});
 	Route::get("/getUserData", function(){return User::getUserData();});
 	Route::get("/logout", function(){return User::logout();});

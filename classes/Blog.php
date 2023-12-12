@@ -5,6 +5,19 @@
 			$title = $_POST['title'];
 			$content = $_POST['content'];
 			$author = $_POST['author'];
+			$html = new simple_html_dom();
+			$html -> load($content);
+			$img = $html -> getElementByTagName("img");
+			$meta = explode(",", $img->src)[0];
+			$base64 = explode(",", $img->src)[1]; //это сама картинка, надо будет сохранить в файл
+			$extension = explode(";", explode("/", $meta)[1])[0];
+			$fileName = "img/blog_img/".microtime().".".$extension;
+			$ifl = fopen($fileName, "wb");
+			fwrite($ifl, base64_decode($base64));
+			fclose($ifl);
+			$img -> src = "/".$fileName;
+			$content = $html -> save();
+
 			$mysqli->query("INSERT INTO articles (title, content, author) VALUES ('$title', '$content', '$author')");
 			header("Location: /blog");
 		}

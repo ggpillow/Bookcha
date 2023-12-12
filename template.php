@@ -79,8 +79,10 @@
 		</nav>
 	</header>
 
+	<div class="container px-4 px-lg-5">
 		<?= $content?>
-
+	</div>
+		
 		<footer class="footer">
 			<div class="container">
 				<div class="row d-flex justify-content-between py-4">
